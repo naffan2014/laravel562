@@ -11,24 +11,41 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
 
+/**
+ * Class UserController
+ *
+ * @package App\Http\Controllers
+ *
+ */
+class UserController extends Controller
+{
 
-class UserController extends Controller{
 
     /**
-     * @param $id
-     * @return mixed
-     * User: 张一帆
+     * 函数的作用
+     *
+     * @param  int $id
+     * @return object
      */
-    public function showProfile($id){
+
+    public function showProfile(int $id): object
+    {
         $user = Redis::get('user:profile');
         return $user;
     }
 
-    public function fakeInsert(){
-        $res = Redis::pipeline(function($pipe){
-            for($i = 0; $i < 1000; $i++){
-                $pipe->set("key:$i",$i);
+    /**
+     *
+     * @return mixed
+     * User: 张一帆
+     */
+    public function fakeInsert()
+    {
+        $res = Redis::pipeline(function ($pipe) {
+            for ($i = 0; $i < 1000; $i++) {
+                $pipe->set("key:$i", $i);
             }
         });
         return $res;
-    }}
+    }
+}
