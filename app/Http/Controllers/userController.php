@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 
 /**
@@ -20,6 +21,12 @@ use Illuminate\Support\Facades\Redis;
 class UserController extends Controller
 {
 
+    function index(){
+        Cache::put('key1','val1',10);
+
+         $value =  Cache::get('key1');
+         var_dump($value);
+    }
 
     /**
      * 函数的作用
