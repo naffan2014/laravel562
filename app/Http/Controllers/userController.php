@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 
@@ -49,10 +48,9 @@ class UserController extends Controller
     public function fakeInsert()
     {
         $res = Redis::pipeline(function ($pipe) {
-            for ($i = 0; $i < 1000; $i++) {
-                $pipe->set("key:$i", $i);
+            for ($i = 0; $i < 100; $i++) {
+                $pipe->setex("key:$i", $i, 10);
             }
         });
-        return $res;
     }
 }

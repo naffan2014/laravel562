@@ -30,3 +30,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/saveData','DataController@save');
 Route::get('/getData','DataController@get');
+
+Route::get('publish',function(){
+    Redis::publish('test-channel',json_encode(['foo'=>'bar']));
+});
