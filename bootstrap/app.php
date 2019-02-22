@@ -41,6 +41,8 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+//$app->register(App\Providers\FacadesServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Return The Application

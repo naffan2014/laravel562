@@ -8,7 +8,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
+use App\Facades\GeoIP\Facade\GeoIP;
 use Illuminate\Support\Facades\Redis;
 
 /**
@@ -21,10 +23,12 @@ class UserController extends Controller
 {
 
     function index(){
-        Cache::put('key1','val1',10);
-
-         $value =  Cache::get('key1');
-         var_dump($value);
+        Log::debug('An informational message.');
+        echo 'done';
+//        Cache::put('key1','val1',10);
+//
+//         $value =  Cache::get('key1');
+//         var_dump($value);
     }
 
     /**
@@ -52,5 +56,12 @@ class UserController extends Controller
                 $pipe->setex("key:$i", $i, 10);
             }
         });
+    }
+
+
+
+    public function testFacade(){
+        $res = GeoIP::getCountry('75.101.195.215');
+        var_dump($res);
     }
 }

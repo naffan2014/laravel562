@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,9 @@ Route::get('/getData','DataController@get');
 Route::get('publish',function(){
     Redis::publish('test-channel',json_encode(['foo'=>'bar']));
 });
+
+Route::get('/cache', function () {
+    return Cache::get('key');
+});
+
+Route::get('testFacade','UserController@testFacade');
