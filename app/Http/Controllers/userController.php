@@ -8,9 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
-use App\Facades\GeoIP\Facade\GeoIP;
 use Illuminate\Support\Facades\Redis;
 
 /**
@@ -23,12 +22,10 @@ class UserController extends Controller
 {
 
     function index(){
-        Log::debug('An informational message.');
-        echo 'done';
-//        Cache::put('key1','val1',10);
-//
-//         $value =  Cache::get('key1');
-//         var_dump($value);
+        Cache::put('key1','val1',10);
+
+         $value =  Cache::get('key1');
+         var_dump($value);
     }
 
     /**
@@ -52,16 +49,10 @@ class UserController extends Controller
     public function fakeInsert()
     {
         $res = Redis::pipeline(function ($pipe) {
-            for ($i = 0; $i < 100; $i++) {
-                $pipe->setex("key:$i", $i, 10);
+            for ($i = 0; $i < 1000; $i++) {
+                $pipe->set("key:$i", $i);
             }
         });
-    }
-
-
-
-    public function testFacade(){
-        $res = GeoIP::getCountry('75.101.195.215');
-        var_dump($res);
+        return $res;
     }
 }
